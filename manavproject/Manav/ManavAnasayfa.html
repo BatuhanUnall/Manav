@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    </head>
+
+    <title>Manav - Taze Meyve ve Sebzeler</title>
+    <style>
+        body {
+
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            justify-content: flex-start;
+            background-color: #45a049;
+            padding: 0.75rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover {
+            transform: scale(1.1);
+        }
+
+        nav a span {
+            margin-right: 0.5rem;
+        }
+
+        .hero {
+            flex: 1;
+            position: relative;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            font-size: 2rem;
+            overflow-y: scroll;
+            padding-bottom: 50px;
+            /* Alt boşluk ekleyin */
+        }
+
+        .hero video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .contact-section {
+            flex: 1;
+            padding: 2rem;
+            text-align: center;
+            background-color: #ffffff;
+            margin: 2rem auto;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 1rem;
+            color: rgb(55, 179, 74);
+        }
+
+        .contact-section p {
+            margin: 0.5rem 0;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .contact-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgb(255, 255, 255);
+        }
+
+        .product-section {
+            padding: 2rem;
+        }
+
+        .product-category {
+            margin-bottom: 2rem;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .product {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 1rem;
+            padding: 1rem;
+            text-align: center;
+            width: 200px;
+            transition: transform 0.3s ease;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .product h3 {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+            color: #4CAF50;
+        }
+
+        .product p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .et_pb_blurb {
+            padding: 20px;
+            border: 2px solid #4caf50;
+            /* Yeşil sınır */
+            border-radius: 10px;
+            background-color: rgb(55, 179, 74);
+            /* Arka plan yeşil */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            color: white;
+            /* Yazıları beyaz yap */
+        }
+
+        .et_pb_blurb h4 {
+            color: white;
+            /* Başlıkları beyaz yap */
+        }
+
+        .et_pb_blurb p {
+            color: white;
+            /* Paragraf yazılarını beyaz yap */
+        }
+
+        .et_pb_blurb a {
+            color: white;
+            /* Link yazılarını beyaz yap */
+            text-decoration: underline;
+            /* İsteğe bağlı, linklerin altını çiz */
+        }
+
+        .et_pb_blurb:hover {
+            transform: translateY(-10px);
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Meyve resmi ile üstteki div'ler arasındaki boşluğu artırma */
+        .contact-section img {
+            margin-top: 40px;
+        }
+
+        .hero {
+            position: relative;
+            text-align: center;
+        }
+
+        .announcement-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            /* Yatay katalogun konumunu ayarlamak için ekledik */
+        }
+
+        .scroll-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: background-color 0.3s ease;
+        }
+
+        .scroll-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .announcement-catalog {
+            display: flex;
+            overflow-x: auto;
+            /* Yatay kaydırma */
+            scroll-behavior: smooth;
+            width: 80%;
+            gap: 20px;
+        }
+
+        .announcement-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            min-width: 200px;
+        }
+
+        .announcement-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 0.5rem;
+            /* Yüksekliği azaltmak için padding'i küçültün */
+            background-color: rgb(55, 179, 74);
+            color: white;
+            margin-top: 0;
+            position: relative;
+            font-size: 0.875rem;
+            /* Yazı boyutunu küçültün */
+
+        }
+
+
+        .promotion-section {
+            flex: 1;
+            padding: 2rem;
+            text-align: center;
+            background-color: #ffffff;
+            margin: 2rem auto;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .promotion-section h2 {
+            margin-bottom: 1rem;
+            color: #4CAF50;
+        }
+
+        .promotion-section p {
+            margin: 0.5rem 0;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .product-category h2 {
+            display: inline-flex;
+            align-items: center;
+            font-size: 2rem;
+            /* Başlık boyutu */
+            color: #ffffff;
+            /* Başlık rengi */
+        }
+
+        .product-category h2 i {
+            margin-left: 0.5rem;
+            /* Başlık ile ikon arasındaki boşluk */
+            font-size: 2rem;
+            /* İkon boyutu */
+            color: #4CAF50;
+            /* İkon rengi */
+        }
+
+        /*slider css*/
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+
+            border-radius: 10px;
+            margin-top: 10px;
+            align-items: center; 
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            transition: 0.5s;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .controls button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /*slider css*/
+    </style>
+    <script>
+        function showSection(section) {
+            document.getElementById('anasayfa').style.display = section === 'anasayfa' ? 'block' : 'none';
+            document.getElementById('iletisim').style.display = section === 'iletisim' ? 'block' : 'none';
+            document.getElementById('tanitim').style.display = section === 'tanitim' ? 'block' : 'none';
+        }
+
+        window.onload = function () {
+            document.getElementById('scroll-left').onclick = function () {
+                document.getElementById('catalog').scrollBy({
+                    left: -200, // sola kaydırma mesafesi
+                    behavior: 'smooth'
+                });
+            };
+
+            document.getElementById('scroll-right').onclick = function () {
+                document.getElementById('catalog').scrollBy({
+                    left: 200, // sağa kaydırma mesafesi
+                    behavior: 'smooth'
+                });
+            };
+        };
+    </script>
+
+</head>
+
+<body onload="showSection('anasayfa')">
+    <header> Karaköy Manavı'na Hoş Geldiniz! </header>
+    <nav> <a href="#" onclick="showSection('anasayfa'); return false;"><span>🏠</span>Anasayfa</a> <a href="#"
+            onclick="showSection('iletisim'); return false;"><span>📞</span>İletişim</a> <a href="#"
+            onclick="showSection('tanitim'); return false;"><span>🎉</span>Tanıtım</a> </nav>
+    <div class="hero" id="anasayfa"> <video autoplay muted loop>
+            <source src="https://www.example.com/sample-video.mp4" type="video/mp4"> Tarayıcınız video etiketini
+            desteklemiyor.
+        </video>
+        <div class="slider-container">
+            <div class="slider" id="slider">
+                <div class="slide"><img
+                        src="https://manavgo.com/wp-content/uploads/slider/cache/d2ae37b8ccfd394ad452e316ab8ce14d/rthrhrthr.png"
+                        alt="Slide 1"></div>
+                <div class="slide"><img
+                        src="https://manavgo.com/wp-content/uploads/slider/cache/e7c19f9fb348eb257c28ffb9afea582a/sgddfgdf.png"
+                        alt="Slide 2"></div>
+                <div class="slide"><img
+                        src="https://manavgo.com/wp-content/uploads/slider/cache/127905fc9cf6e6c338d9e67aef372993/Ekran-goruntusu-2025-02-04-122520.png"
+                        alt="Slide 3"></div>
+                <div class="slide"><img src="https://via.placeholder.com/400x200/ffff7f" alt="Slide 4"></div>
+            </div>
+            <div class="controls">
+                <button id="prev">&#10094;</button>
+                <button id="next">&#10095;</button>
+            </div>
+        </div>
+
+        Topraktan Sofranıza Güvenle Gelen Taze Sebze ve Meyveler! <section class="product-section">
+            <div class="product-category" id="meyveler">
+                <h2>Meyveler <i class="fas fa-apple-alt" style="color: #14dc2b;"></i><i class="fas fa-lemon"
+                        style="color: #FFD700;"></i> </h2>
+                <div class="product-list">
+                    <div class="product"> <img src="meyveresimleri/hurma.webp" alt="Meyve 1">
+                        <h3>Cennet Hurması</h3>
+                        <p>₺85.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/ayva.webp" alt="Meyve 2">
+                        <h3>Ayva</h3>
+                        <p>₺55.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/goldenelma.jpg" alt="Meyve 1">
+                        <h3>Golden Elma</h3>
+                        <p>₺52.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/arjantin.webp" alt="Soğan">
+                        <h3>Arjantin Elma</h3>
+                        <p>₺62.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/portakal.jpg" alt="Soğan">
+                        <h3>Portakal</h3>
+                        <p>₺55.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/dalportakal.webp" alt="Soğan">
+                        <h3>Dal Portakal</h3>
+                        <p>₺28.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/çilakkk.webp" alt="Soğan">
+                        <h3>Çilek</h3>
+                        <p>₺220.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/starkingelma.jpg" alt="Soğan">
+                        <h3>Starking Elma</h3>
+                        <p>₺52.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/fuji.jpg" alt="Soğan">
+                        <h3>Fuji Elma</h3>
+                        <p>₺59.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/avokado.jpg" alt="Soğan">
+                        <h3>Avokado</h3>
+                        <p>₺59.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/ejder.webp" alt="Soğan">
+                        <h3>Ejder Meyvesi</h3>
+                        <p>₺130.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/izmirmandliana.jpg" alt="Soğan">
+                        <h3>İzmir Mandalina</h3>
+                        <p>₺70.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/King.jpg" alt="Soğan">
+                        <h3>King Mandalina</h3>
+                        <p>₺55.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/yerlimuz.jpeg" alt="Soğan">
+                        <h3>Yerli Muz</h3>
+                        <p>₺69.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/nar.webp" alt="Soğan">
+                        <h3>Nar</h3>
+                        <p>₺52.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/limon.jpeg" alt="Soğan">
+                        <h3>Limon</h3>
+                        <p>₺40.00( tane 5₺ )</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/santamariarmut.jpg" alt="Soğan">
+                        <h3>Santa Maria Armut</h3>
+                        <p>₺65.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/pepi.jpg" alt="Soğan">
+                        <h3>Pepino</h3>
+                        <p>₺70.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/kavunkırkagac.jpeg" alt="Soğan">
+                        <h3>Kırkağaç Kavun</h3>
+                        <p>₺39.95</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/üzümredglobe.png" alt="">
+                        <h3>Red Globe Üzüm</h3>
+                        <p>₺250.00</p>
+                    </div>
+                    <div class="product"> <img src="meyveresimleri/çekirdeksiz üzüm.avif" alt="Soğan">
+                        <h3>Çekirdeksiz Üzüm</h3>
+                        <p>₺106.95</p>
+                    </div>
+                    <!-- Daha fazla meyve ekleyebilirsiniz -->
+                </div>
+            </div>
+            <div class="product-category" id="sebzeler">
+                <h2>Sebzeler <i class="fas fa-carrot" style="color: #FFA500;"></i><i class="fas fa-leaf"
+                        style="color: #228B22;"></i></h2>
+                <div class="product-list">
+                    <div class="product"> <img src="sebzeresimleri/sogggg.jpg" alt="Soğan">
+                        <h3>Soğan</h3>
+                        <p>₺22.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/pattis.jpg" alt="Patates">
+                        <h3>Patates</h3>
+                        <p>₺17.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/habuc.jpg" alt="Havuç">
+                        <h3>Havuç</h3>
+                        <p>₺30.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/kapya.webp" alt="Kapya Biber">
+                        <h3>Kapya Biber</h3>
+                        <p>₺115.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/pırasa.webp" alt="Kapya Biber">
+                        <h3>Pırasa</h3>
+                        <p>₺50.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/dom.jpg" alt="Kapya Biber">
+                        <h3>Domates</h3>
+                        <p>₺55.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/kokdom.jpg" alt="Kapya Biber">
+                        <h3>Kokteyl Domates</h3>
+                        <p>₺95.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/sarımsak.webp" alt="Kapya Biber">
+                        <h3>Sarımsak</h3>
+                        <p>₺115.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/lahana.avif" alt="Kapya Biber">
+                        <h3>Lahana</h3>
+                        <p>Stokta Yok</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/maydonoz.png" alt="Kapya Biber">
+                        <h3>Maydonoz</h3>
+                        <p>₺20.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/roka.jpg" alt="Kapya Biber">
+                        <h3>Roka</h3>
+                        <p>₺20.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/tere.png" alt="Kapya Biber">
+                        <h3>Tere</h3>
+                        <p>₺20.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/yesog.jpg" alt="Kapya Biber">
+                        <h3>YeşiL Soğan</h3>
+                        <p>₺35.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/karnabahar.jpg" alt="Kapya Biber">
+                        <h3>Karnabahar</h3>
+                        <p>₺115.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/Carliston-Biber.jpg" alt="Kapya Biber">
+                        <h3>Çarliston Biber</h3>
+                        <p>₺80.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/yesilbiber.avif" alt="Kapya Biber">
+                        <h3>Yeşil Biber</h3>
+                        <p>₺85.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/morla.webp" alt="Kapya Biber">
+                        <h3>Mor Lahana</h3>
+                        <p>₺80.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/salatalık.jpg" alt="Salatalık">
+                        <h3>Salatalık</h3>
+                        <p>₺55.00</p>
+                    </div>
+                    <div class=" product"> <img src="sebzeresimleri/ıspanak.jpg" alt="Kapya Biber">
+                        <h3>Ispanak</h3>
+                        <p>₺70.00</p>
+                    </div>
+                    <div class="product"> <img src="sebzeresimleri/marul.png" alt="Kapya Biber">
+                        <h3>Marul</h3>
+                        <p>₺40.00</p>
+                    </div>
+                    <!-- Daha fazla sebze ekleyebilirsiniz -->
+                </div>
+            </div>
+        </section>
+    </div>
+    <section class="contact-section" id="iletisim">
+        <h2>İletişim Bilgilerimiz</h2>
+        <div class="grid-container">
+            <div class="et_pb_column et_pb_column_1_3 et_pb_column_1 et_pb_css_mix_blend_mode_passthrough">
+                <div
+                    class="et_pb_module et_pb_blurb et_pb_blurb_1 dct_blurb_cnt et_pb_text_align_center et_pb_blurb_position_top et_pb_bg_layout_light">
+                    <div class="et_pb_blurb_content">
+                        <div class="et_pb_main_blurb_image"><span class="et_pb_image_wrap"><span
+                                    class="et-waypoint et_pb_animation_top et_pb_animation_top_tablet et_pb_animation_top_phone et-pb-icon et-animated"></span></span>
+                        </div>
+                        <div class="et_pb_blurb_container">
+                            <h4 class="et_pb_module_header"><span>Adres</span> <i class="fas fa-map-marker-alt"></i>
+                            </h4>
+                            <div class="et_pb_blurb_description">
+                                <p>Beykoz / İstanbul</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="et_pb_column et_pb_column_1_3 et_pb_column_1 et_pb_css_mix_blend_mode_passthrough">
+                <div
+                    class="et_pb_module et_pb_blurb et_pb_blurb_1 dct_blurb_cnt et_pb_text_align_center et_pb_blurb_position_top et_pb_bg_layout_light">
+                    <div class="et_pb_blurb_content">
+                        <div class="et_pb_main_blurb_image"><span class="et_pb_image_wrap"><span
+                                    class="et-waypoint et_pb_animation_top et_pb_animation_top_tablet et_pb_animation_top_phone et-pb-icon et-animated"></span></span>
+                        </div>
+                        <div class="et_pb_blurb_container">
+                            <h4 class="et_pb_module_header"><span>Telefon</span> <i class="fas fa-phone"></i></h4>
+                            <div class="et_pb_blurb_description">
+                                <p>0 536 795 28 65</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="et_pb_column et_pb_column_1_3 et_pb_column_1 et_pb_css_mix_blend_mode_passthrough">
+                <div
+                    class="et_pb_module et_pb_blurb et_pb_blurb_1 dct_blurb_cnt et_pb_text_align_center et_pb_blurb_position_top et_pb_bg_layout_light">
+                    <div class="et_pb_blurb_content">
+                        <div class="et_pb_main_blurb_image"><span class="et_pb_image_wrap"><span
+                                    class="et-waypoint et_pb_animation_top et_pb_animation_top_tablet et_pb_animation_top_phone et-pb-icon et-animated"></span></span>
+                        </div>
+                        <div class="et_pb_blurb_container">
+                            <h4 class="et_pb_module_header"><span>E-posta</span> <i class="fas fa-envelope"></i></h4>
+                            <div class="et_pb_blurb_description">
+                                <p>info@manav.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="et_pb_column et_pb_column_1_3 et_pb_column_1 et_pb_css_mix_blend_mode_passthrough">
+                <div
+                    class="et_pb_module et_pb_blurb et_pb_blurb_1 dct_blurb_cnt et_pb_text_align_center et_pb_blurb_position_top et_pb_bg_layout_light">
+                    <div class="et_pb_blurb_content">
+                        <div class="et_pb_main_blurb_image"><span class="et_pb_image_wrap"><span
+                                    class="et-waypoint et_pb_animation_top et_pb_animation_top_tablet et_pb_animation_top_phone et-pb-icon et-animated"></span></span>
+                        </div>
+                        <div class="et_pb_blurb_container">
+                            <h4 class="et_pb_module_header"><span>Instagram</span> <i class="fab fa-instagram"></i></h4>
+                            <div class="et_pb_blurb_description">
+                                <p><a
+                                        href="https://www.instagram.com/karakoymanav?igsh=MWhlaXRlNHc4bWZtYg==">Adresimiz</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="meyveresimleri/947c8ebdf0e16e9d0cb1e6a70dfaf0ea.jpg" alt="Taze Meyve ve Sebzeler">
+    </section>
+
+
+
+    <section class="promotion-section" id="tanitim">
+        <h2>Tanıtım</h2>
+        <p>İşletmemizden taze meyve ve sebzeleri satın alabilirsiniz. Haftalık kampanyalarımız ve indirimlerimiz ile
+            sağlıklı ve ekonomik alışverişin keyfini çıkarın!</p>
+        <img src="fotoğraf_yolu.jpg" alt="Taze Meyve ve Sebzeler">
+        <video width="320" height="240" controls>
+            <source src="video_yolu.mp4" type="video/mp4">
+            Tarayıcınız bu videoyu desteklemiyor.
+        </video>
+    </section>
+
+    <footer> &copy; 2025 Karaköy Manav | Tüm Hakları Saklıdır. </footer>
+</body>
+
+<script>
+    let index = 0;
+    const slider = document.getElementById('slider');
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    document.getElementById('next').addEventListener('click', () => {
+        index = (index + 1) % totalSlides;
+        updateSlider();
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+        index = (index - 1 + totalSlides) % totalSlides;
+        updateSlider();
+    });
+
+    function updateSlider() {
+        slider.style.transform = `translateX(-${index * 100}%)`;
+    }
+</script>
+
+</html>
